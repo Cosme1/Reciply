@@ -1,114 +1,85 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+// In App.js in a new project
 
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { View, Text, Button, useColorScheme, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-  Section1,
-} from 'react-native/Libraries/NewAppScreen';
+import RecipeScreen from './src/screens/RecipesScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+function HomeScreen({ navigation }) {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+	<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+	  <Text>Home Screen</Text>
+	  <Button
+		title="Details"
+		onPress={() => navigation.navigate('Details')}
+	  />
+	</View>
   );
-};
+}
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+function StackScreen() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <Section1 />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+	<Stack.Navigator>
+	  <Stack.Screen
+		name="Home"
+		component={HomeScreen}
+		options={{ 
+		  title: 'My home',
+		  headerStyle: {
+			backgroundColor: '#f4511e',
+		  }
+		 }}
+	  />
+	</Stack.Navigator>
   );
-};
+}
+
+function DetailsScreen( {navigation} ) {
+  return (
+	<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+	  <Text>Details Screen</Text>
+	  <Button
+		title="Home"
+		onPress={() => navigation.navigate('Home')}
+	  />
+	</View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+const Drawer = createDrawerNavigator();
+
+function App() {
+  return (
+	<NavigationContainer>
+	  <Drawer.Navigator initialRouteName="Homee">
+		<Drawer.Screen name="Home" component={HomeScreen} />
+		<Drawer.Screen name="Recipes" component={RecipeScreen} />
+		<Drawer.Screen name="StackScreen" component={StackScreen} />
+	  </Drawer.Navigator>
+	</NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  headerStyle: {
+	color: 'blue',
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+	fontSize: 24,
+	fontWeight: '600',
   },
   sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+	marginTop: 8,
+	fontSize: 18,
+	fontWeight: '400',
   },
   highlight: {
-    fontWeight: '700',
+	fontWeight: '700',
   },
 });
 
