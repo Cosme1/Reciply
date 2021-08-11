@@ -4,11 +4,12 @@ import React from 'react';
 import { View, Text, Button, useColorScheme, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import RecipeScreen from './src/screens/RecipesScreen';
+import CreateRecipeScreen from './src/screens/CreateRecipeScreen';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
   return (
 	<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 	  <Text>Home Screen</Text>
@@ -56,10 +57,11 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
 	<NavigationContainer>
-	  <Drawer.Navigator initialRouteName="Homee">
+	  <Drawer.Navigator initialRouteName="Recipes">
 		<Drawer.Screen name="Home" component={HomeScreen} />
 		<Drawer.Screen name="Recipes" component={RecipeScreen} />
 		<Drawer.Screen name="StackScreen" component={StackScreen} />
+		<Drawer.Screen name="CreateRecipe" component={CreateRecipeScreen} />
 	  </Drawer.Navigator>
 	</NavigationContainer>
   );
