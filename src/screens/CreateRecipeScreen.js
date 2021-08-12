@@ -6,19 +6,27 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  StyleSheet,
+  TextInput,
 } from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import CameraRoll from '@react-native-community/cameraroll';
+
 import {Food} from './RecipesScreen';
 
-let Pasta2 = new Food()
-
-
+let Pasta2 = new Food();
 
 function CreateRecipeLayout() {
-  return <ScrollView></ScrollView>;
+  const text = React.useState(null);
+  return (
+    <ScrollView>
+      <Image Placeholdercontent={<TouchableOpacity></TouchableOpacity>}/>
+      <TextInput style={styles.input} value={text} placeholder="Name" />
+    </ScrollView>
+  );
 }
 
 function CreateRecipeScreen({navigation}) {
@@ -51,5 +59,19 @@ function CreateRecipeScreen({navigation}) {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+
+  image: {
+	  height: 200,
+
+  }
+});
 
 export default CreateRecipeScreen;

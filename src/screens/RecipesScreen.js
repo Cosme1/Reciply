@@ -28,11 +28,11 @@ let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, true, 30);
 
 function RecipeLayout() {
-//   if (Pizza.vegetarian === true) {
-//     veg = <Text style={styles.foodSubtitle}>Vegetarian</Text>;
-//   } else {
-//     veg = null;
-//   }
+  if (Pizza.vegetarian === true) {
+    veg = <Text style={styles.foodSubtitle}>Vegetarian</Text>;
+  } else {
+    veg = null;
+  }
   return (
     <ScrollView style={styles.container}>
       <TouchableHighlight style={{paddingVertical: 5}}>
