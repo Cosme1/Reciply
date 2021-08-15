@@ -20,5 +20,9 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to your photos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Access to your library</string>
 </dict>
 </plist>
