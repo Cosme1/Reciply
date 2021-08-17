@@ -24,5 +24,7 @@
 	<string>Access to your photos</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Access to your library</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+<string>This app requires access to the photo library.</string>
 </dict>
 </plist>
