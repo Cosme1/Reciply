@@ -14,6 +14,9 @@ target 'Reciply' do
 
 
 
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'ReciplyTests' do
     inherit! :complete
     # Pods for testing
