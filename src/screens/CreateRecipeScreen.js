@@ -16,6 +16,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {Image} from 'react-native-elements';
 import {Food} from './RecipesScreen';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import store from 'react-native-simple-store';
 
 let Pasta2 = new Food();
 
@@ -32,7 +33,7 @@ function CreateRecipeLayout() {
     });
   };
 
-  const text = React.useState(null);
+  const name = React.useState(null);
   return (
     <ScrollView>
       <Image
@@ -43,7 +44,7 @@ function CreateRecipeLayout() {
         }
       />
       <Button title={'Choose Photo'} onPress={choosePhotofromLibrary}></Button>
-      <TextInput style={styles.input} value={text} placeholder="Name" />
+      <TextInput style={styles.input} value={name} placeholder="Name" />
     </ScrollView>
   );
 }
