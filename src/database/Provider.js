@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
 import Realm from 'realm';
-import {Recipe} from './Schemas';
+import {Recipe} from './Realm';
 import {RecipeLayout} from '../screens/RecipesScreen';
 import {getRealmApp} from '../../getRealmApp';
 

@@ -48,11 +48,7 @@ function App() {
         >
           {props => {
             const {navigation} = props;
-            return (
-              <Provider View={RecipeLayout} navigation={navigation} ID={'1'}>
-                <RecipeLayout navigation={navigation} />
-              </Provider>
-            );
+            return <RecipeLayout navigation={navigation} />;
           }}
         </Drawer.Screen>
         <Drawer.Screen name="CreateRecipe" component={CreateRecipeLayout} />

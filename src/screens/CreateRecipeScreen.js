@@ -70,14 +70,14 @@ function CreateRecipeLayout({route, navigation}) {
     // let newRecipe = new setNewRecipe();
     // console.log(Recipe);
     // let setRecipe;
-    // realm.write(() => {
-    //   setRecipe = realm.create('_Recipe', {
-    //     _id: 1,
-    //     setname: name,
-    //     setcalories: calories,
-    //     setpreptime: preptime,
-    //   });
-    // });
+    realm.write(() => {
+      setRecipe = realm.create('_Recipe', {
+        _id: 1,
+        setname: name,
+        setcalories: calories,
+        setpreptime: preptime,
+      });
+    });
 
     // setRecipe.addListener((obj, changes) => {
     // 	changes.changedProperties.forEach((changedProperty) => {
@@ -88,7 +88,7 @@ function CreateRecipeLayout({route, navigation}) {
     // });
 
     // realm.close();
-    createRecipe(name, calories, preptime);
+    //createRecipe(name, calories, preptime);
     navigation.dispatch(CommonActions.goBack()); // goes back to Recipe Screen
     // remove text fields
   };
