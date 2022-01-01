@@ -1,10 +1,8 @@
 import React from 'react';
 import {View, Text, TouchableHighlight, Image, StyleSheet} from 'react-native';
-import {useRecipe} from '../database/Provider';
+import Realm from '../database/Realm';
 
 export function RecipeItem({recipe}) {
-  const {deleteRecipe, setRecipeStatus} = useRecipe();
-
   //   const actions = [
   //     {
   //       title: 'Delete',
@@ -15,7 +13,7 @@ export function RecipeItem({recipe}) {
   //   ];
 
   return (
-    <TouchableHighlight key={recipe.id} style={{paddingVertical: 5}}>
+    <TouchableHighlight key={Realm.id} style={{paddingVertical: 5}}>
       <View style={styles.button}>
         <View>
           <Text style={styles.foodTitle}>{recipe.name}</Text>

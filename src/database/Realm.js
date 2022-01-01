@@ -1,5 +1,5 @@
-import Realm from 'realm';
-const RecipeSchema = {
+//import Realm from 'realm';
+export const RecipeSchema = {
   name: '_Recipe',
   properties: {
     id: 'objectId',
@@ -10,4 +10,7 @@ const RecipeSchema = {
   primaryKey: 'id',
 };
 
-export default new Realm({schema: RecipeSchema});
+// export default new Realm({
+//   schema: [RecipeSchema],
+//   path: 'realfile.realm',
+// });

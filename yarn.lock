@@ -2387,6 +2387,11 @@
   dependencies:
     "node-int64" "^0.4.0"
 
+"bson-objectid@^2.0.1":
+  "integrity" "sha512-b4D1/G4uP9Yks4rv+nDVsZ4ybT1W5nQYw4lfpfaRP2Q18azlR6Oe2BAuirG1lzrwQFtHnJ0nrK5kWKKZVEMUng=="
+  "resolved" "https://registry.npmjs.org/bson-objectid/-/bson-objectid-2.0.1.tgz"
+  "version" "2.0.1"
+
 "bson@4.4.1":
   "integrity" "sha512-Uu4OCZa0jouQJCKOk1EmmyqtdWAP5HVLru4lQxTwzJzxT+sJ13lVpEZU/MATDxtHiekWMAL84oQY3Xn1LpJVSg=="
   "resolved" "https://registry.npmjs.org/bson/-/bson-4.4.1.tgz"

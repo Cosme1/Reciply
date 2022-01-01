@@ -15,7 +15,6 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Image} from 'react-native-elements/dist/image/Image';
 import {RecipeLayout} from './src/screens/RecipesScreen';
 import CreateRecipeLayout from './src/screens/CreateRecipeScreen';
-import {Provider} from './src/database/Provider';
 
 const Stack = createStackNavigator();
 
@@ -41,16 +40,8 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Recipes">
-        <Drawer.Screen
-          name="Recipes"
-          //component={RecipeLayout}
-        >
-          {props => {
-            const {navigation} = props;
-            return <RecipeLayout navigation={navigation} />;
-          }}
-        </Drawer.Screen>
+      <Drawer.Navigator initialRouteName="CreateRecipe">
+        <Drawer.Screen name="Recipes" component={RecipeLayout} />
         <Drawer.Screen name="CreateRecipe" component={CreateRecipeLayout} />
       </Drawer.Navigator>
     </NavigationContainer>

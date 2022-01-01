@@ -22,6 +22,8 @@ import {setNewRecipe} from './RecipesScreen';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import SwitchSelector from 'react-native-switch-selector';
 import {DebugInstructions} from 'react-native/Libraries/NewAppScreen';
+import realm from 'realm';
+import ObjectId from 'bson-objectid';
 
 let Pasta2 = new Food();
 
@@ -40,7 +42,7 @@ export function Food(name, calories, vegetarian, preptime) {
 }
 
 function CreateRecipeLayout({route, navigation}) {
-  const {createRecipe} = route.params;
+  //const {createRecipe} = route.params;
 
   //   const RecipeSchema = {
   //     name: '_Recipe',
@@ -70,15 +72,15 @@ function CreateRecipeLayout({route, navigation}) {
     // let newRecipe = new setNewRecipe();
     // console.log(Recipe);
     // let setRecipe;
+
     realm.write(() => {
-      setRecipe = realm.create('_Recipe', {
-        _id: 1,
+      realm.create('_Recipe', {
+        id: new ObjectId(),
         setname: name,
         setcalories: calories,
         setpreptime: preptime,
       });
     });
-
     // setRecipe.addListener((obj, changes) => {
     // 	changes.changedProperties.forEach((changedProperty) => {
     // 		console.log(
@@ -87,7 +89,7 @@ function CreateRecipeLayout({route, navigation}) {
     // 	  });
     // });
 
-    // realm.close();
+    //realm.close();
     //createRecipe(name, calories, preptime);
     navigation.dispatch(CommonActions.goBack()); // goes back to Recipe Screen
     // remove text fields

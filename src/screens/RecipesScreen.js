@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   AppRegistry,
   View,
@@ -14,7 +14,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Image} from 'react-native-elements/dist/image/Image';
 import CreateRecipeLayout from './CreateRecipeScreen';
 import {Food, recipeNameArray} from './CreateRecipeScreen';
-import {useRecipe} from '../database/Provider';
+import {RecipeSchema} from '../database/Realm';
 import Realm from 'realm';
 import {RecipeItem} from '../components/RecipeItem';
 import {AddRecipe} from '../components/';
@@ -64,31 +64,40 @@ const listRecipes = [];
 let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, true, 30);
 
+// function GetRecipe() {
+//   Realm.open({schema: [RecipeSchema]});
+//   console.log(Realm.objects('_Recipe'));
+//   const recipesData = Realm.objects('_Recipe');
+//   setrecipes(recipesData);
+// }
 export function RecipeLayout({navigation}) {
   if (Pizza.vegetarian == true) {
     veg = <Text style={styles.foodSubtitle}>Vegetarian</Text>;
   } else {
     veg = null;
   }
-  console.log('test1');
-  const {recipes, createRecipe} = useRecipe();
+  const [recipes, setrecipes] = useState([]);
   useEffect(() => {
+    Realm.open({
+      path: 'RealmDatabase.realm',
+      schema: [RecipeSchema],
+    }).then(realm => {
+      setrecipes(realm);
+    });
     navigation.setOptions({
       headerRight: function Header() {
         return (
           <Button
             type="clear"
             title="&#x2b;"
-            onPress={() =>
-              navigation.navigate('CreateRecipe', {createRecipe: createRecipe})
-            }
+            onPress={() => navigation.navigate('CreateRecipe')}
             titleStyle={styles.addButton}
             //style={{transform: [{scale: 0.12}, {translateX: 900}]}}
           />
         );
       },
     });
-  });
+  }, [navigation]);
   //   let array = listRecipes.map(count => {
   //     <TouchableHighlight style={{paddingVertical: 5}} key={count}>
   //       <View style={styles.button}>
