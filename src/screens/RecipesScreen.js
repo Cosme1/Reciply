@@ -14,8 +14,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Image} from 'react-native-elements/dist/image/Image';
 import CreateRecipeLayout from './CreateRecipeScreen';
 import {Food, recipeNameArray} from './CreateRecipeScreen';
-import {RecipeSchema} from '../database/Realm';
-import Realm from 'realm';
+import realm from '../database/Realm';
 import {RecipeItem} from '../components/RecipeItem';
 import {AddRecipe} from '../components/';
 import {Icon, Button} from 'react-native-elements';
@@ -77,13 +76,15 @@ export function RecipeLayout({navigation}) {
     veg = null;
   }
   const [recipes, setrecipes] = useState([]);
+  console.log(recipes.id);
   useEffect(() => {
-    Realm.open({
-      path: 'RealmDatabase.realm',
-      schema: [RecipeSchema],
-    }).then(realm => {
-      setrecipes(realm);
-    });
+    // Realm.open({
+    //   path: 'RealmDatabase.realm',
+    //   schema: [RecipeSchema],
+    // }).then(realm => {
+    //   setrecipes([realm]);
+    // });
+    setrecipes([realm]);
     navigation.setOptions({
       headerRight: function Header() {
         return (
@@ -98,6 +99,7 @@ export function RecipeLayout({navigation}) {
       },
     });
   }, [navigation]);
+  console.log(recipes);
   //   let array = listRecipes.map(count => {
   //     <TouchableHighlight style={{paddingVertical: 5}} key={count}>
   //       <View style={styles.button}>
@@ -113,7 +115,6 @@ export function RecipeLayout({navigation}) {
   //   });
 
   return (
-    //recipe.map(recipe => (recipe ? <RecipeItem recipe={recipe} /> : null))
     <ScrollView style={styles.container}>
       <TouchableHighlight style={{paddingVertical: 5}}>
         <View style={styles.button}>

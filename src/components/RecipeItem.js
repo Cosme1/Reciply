@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableHighlight, Image, StyleSheet} from 'react-native';
-import Realm from '../database/Realm';
+import realm from '../database/Realm';
 
 export function RecipeItem({recipe}) {
   //   const actions = [
@@ -11,9 +11,10 @@ export function RecipeItem({recipe}) {
   //       },
   //     },
   //   ];
-
+  console.log(`${realm.id}`);
+  console.log(recipe.name);
   return (
-    <TouchableHighlight key={Realm.id} style={{paddingVertical: 5}}>
+    <TouchableHighlight key={realm.id} style={{paddingVertical: 5}}>
       <View style={styles.button}>
         <View>
           <Text style={styles.foodTitle}>{recipe.name}</Text>

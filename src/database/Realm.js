@@ -1,4 +1,4 @@
-//import Realm from 'realm';
+import Realm from 'realm';
 export const RecipeSchema = {
   name: '_Recipe',
   properties: {
@@ -10,7 +10,7 @@ export const RecipeSchema = {
   primaryKey: 'id',
 };
 
-// export default new Realm({
-//   schema: [RecipeSchema],
-//   path: 'realfile.realm',
-// });
+export default new Realm({
+  schema: [RecipeSchema],
+  path: 'RealmDatabase.realm',
+});
