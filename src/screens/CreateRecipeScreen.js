@@ -25,8 +25,6 @@ import {DebugInstructions} from 'react-native/Libraries/NewAppScreen';
 import {BSON} from 'realm';
 import realm from '../database/Realm';
 
-let Pasta2 = new Food();
-
 const recipeNameArray = [];
 
 const options = [
@@ -69,10 +67,6 @@ function CreateRecipeLayout({route, navigation}) {
   };
 
   const SaveButton = () => {
-    // let newRecipe = new setNewRecipe();
-    // console.log(Recipe);
-    // let setRecipe;
-
     realm.write(() => {
       realm.create('_Recipe', {
         id: new BSON.ObjectId(),
@@ -97,6 +91,7 @@ function CreateRecipeLayout({route, navigation}) {
   const [name, onChangeName] = useState(null);
   const [calories, onChangeCalories] = useState(null);
   const [preptime, onChangePrepTime] = useState(null);
+  const [vegetarian, onChangeVegetarian] = useState(false);
 
   return (
     <ScrollView>

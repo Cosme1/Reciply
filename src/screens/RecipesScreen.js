@@ -16,14 +16,7 @@ import CreateRecipeLayout from './CreateRecipeScreen';
 import {Food, recipeNameArray} from './CreateRecipeScreen';
 import realm from '../database/Realm';
 import {RecipeItem} from '../components/RecipeItem';
-import {AddRecipe} from '../components/';
 import {Icon, Button} from 'react-native-elements';
-
-var tempname;
-var tempcalories;
-var temppreptime;
-var index = 0;
-const listRecipes = [];
 
 // export function setNewRecipe(Name, Calories, vegetarian, preptime) {
 //   //store.get('key').then(key => const key);
@@ -61,7 +54,7 @@ const listRecipes = [];
 // }
 
 let Pizza = new Food('Pizza', 2269, true, 30);
-let Pasta = new Food('Pasta', 2269, true, 30);
+let Pasta = new Food('Pasta', 2269, false, 30);
 
 // function GetRecipe() {
 //   Realm.open({schema: [RecipeSchema]});
@@ -70,13 +63,17 @@ let Pasta = new Food('Pasta', 2269, true, 30);
 //   setrecipes(recipesData);
 // }
 export function RecipeLayout({navigation}) {
-  if (Pizza.vegetarian == true) {
+  let veg;
+  if (Pizza.vegetarian === true) {
     veg = <Text style={styles.foodSubtitle}>Vegetarian</Text>;
   } else {
     veg = null;
   }
   const [recipes, setrecipes] = useState([]);
-  console.log(recipes.id);
+  console.log('length: ', recipes.length);
+
+  //console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.name)}`);
+  console.log('Objects: ', realm.objects('_Recipe'));
   useEffect(() => {
     // Realm.open({
     //   path: 'RealmDatabase.realm',
@@ -84,7 +81,8 @@ export function RecipeLayout({navigation}) {
     // }).then(realm => {
     //   setrecipes([realm]);
     // });
-    setrecipes([realm]);
+    const Recipes = realm.objects('_Recipe');
+    setrecipes([Recipes]);
     navigation.setOptions({
       headerRight: function Header() {
         return (
@@ -99,7 +97,6 @@ export function RecipeLayout({navigation}) {
       },
     });
   }, [navigation]);
-  console.log(recipes);
   //   let array = listRecipes.map(count => {
   //     <TouchableHighlight style={{paddingVertical: 5}} key={count}>
   //       <View style={styles.button}>
@@ -142,8 +139,8 @@ export function RecipeLayout({navigation}) {
         </View>
       </TouchableHighlight>
       {recipes.map(recipe =>
-        recipe ? <RecipeItem key={`${recipe.id}`} recipe={recipe} /> : null,
-      )}
+        <RecipeItem key={`${recipe.id}`} recipe={recipe} />
+      }
     </ScrollView>
   );
 }
