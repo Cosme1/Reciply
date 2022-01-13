@@ -52,7 +52,7 @@ import {Icon, Button} from 'react-native-elements';
 //     </TouchableHighlight>
 //   );
 // }
-
+const test = [2, 3, 4];
 let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, false, 30);
 
@@ -138,9 +138,12 @@ export function RecipeLayout({navigation}) {
             style={styles.image}></Image>
         </View>
       </TouchableHighlight>
-      {recipes.map(recipe =>
+      {recipes.map(recipe => (
         <RecipeItem key={`${recipe.id}`} recipe={recipe} />
-      }
+      ))}
+      {test.map(tests => (
+        <Text key={tests}>Test {tests}</Text>
+      ))}
     </ScrollView>
   );
 }
