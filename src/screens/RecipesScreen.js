@@ -138,9 +138,27 @@ export function RecipeLayout({navigation}) {
             style={styles.image}></Image>
         </View>
       </TouchableHighlight>
-      {recipes.map(recipe => (
-        <RecipeItem key={`${recipe.id}`} recipe={recipe} />
-      ))}
+      {/* {recipes.map(_recipe => (
+        <RecipeItem key={`${_recipe.id}`} recipe={_recipe} />
+      ))} */}
+      {recipes.map(recipe => {
+        <TouchableHighlight key={recipes.length} style={{paddingVertical: 5}}>
+          <View style={styles.button}>
+            <View>
+              <Text style={styles.foodTitle}>{recipe.name}</Text>
+              {recipe.vegetarian ? (
+                <Text style={styles.foodSubtitle}>Vegetarian</Text>
+              ) : null}
+              <Text style={styles.foodSubtitle}>
+                Calories: {recipe.calories}
+              </Text>
+            </View>
+            <Image
+              source={require('../assets/pizza.jpg')}
+              style={styles.image}></Image>
+          </View>
+        </TouchableHighlight>;
+      })}
       {test.map(tests => (
         <Text key={tests}>Test {tests}</Text>
       ))}
