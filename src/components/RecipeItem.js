@@ -17,11 +17,13 @@ export function RecipeItem({recipe}) {
     <TouchableHighlight key={realm.id} style={{paddingVertical: 5}}>
       <View style={styles.button}>
         <View>
-          <Text style={styles.foodTitle}>{recipe.name}</Text>
+          <Text style={styles.foodTitle}>{recipe.setname}</Text>
           {recipe.vegetarian ? (
             <Text style={styles.foodSubtitle}>Vegetarian</Text>
           ) : null}
-          <Text style={styles.foodSubtitle}>Calories: {recipe.calories}</Text>
+          <Text style={styles.foodSubtitle}>
+            Calories: {recipe.setcalories}
+          </Text>
         </View>
         <Image
           source={require('../assets/pizza.jpg')}

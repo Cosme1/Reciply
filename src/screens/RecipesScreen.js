@@ -71,9 +71,18 @@ export function RecipeLayout({navigation}) {
   }
   const [recipes, setrecipes] = useState([]);
   console.log('length: ', recipes.length);
+  console.log(recipes.toString().length);
+  console.log(JSON.stringify(recipes));
 
-  //console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.name)}`);
   console.log('Objects: ', realm.objects('_Recipe'));
+  const Recipes = realm.objects('_Recipe');
+  console.log(
+    `These are all recipes: ${Recipes.map(Recipe => Recipe.setname)}`,
+  );
+  realm.addListener('change', () => {
+    setrecipes([Recipes]);
+    console.log(`Added ${Recipes.toJSON}`);
+  });
   useEffect(() => {
     // Realm.open({
     //   path: 'RealmDatabase.realm',
@@ -81,8 +90,9 @@ export function RecipeLayout({navigation}) {
     // }).then(realm => {
     //   setrecipes([realm]);
     // });
-    const Recipes = realm.objects('_Recipe');
-    setrecipes([Recipes]);
+    //console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.name)}`);
+    //setrecipes([Recipes]);
+
     navigation.setOptions({
       headerRight: function Header() {
         return (
@@ -96,7 +106,7 @@ export function RecipeLayout({navigation}) {
         );
       },
     });
-  }, [navigation]);
+  }, [navigation, Recipes]);
   //   let array = listRecipes.map(count => {
   //     <TouchableHighlight style={{paddingVertical: 5}} key={count}>
   //       <View style={styles.button}>
@@ -138,11 +148,13 @@ export function RecipeLayout({navigation}) {
             style={styles.image}></Image>
         </View>
       </TouchableHighlight>
-      {/* {recipes.map(_recipe => (
+      {Recipes.map(_recipe => (
         <RecipeItem key={`${_recipe.id}`} recipe={_recipe} />
-      ))} */}
+      ))}
       {recipes.map(recipe => {
-        <TouchableHighlight key={recipes.length} style={{paddingVertical: 5}}>
+        <TouchableHighlight
+          key={`${recipe.length}`}
+          style={{paddingVertical: 5}}>
           <View style={styles.button}>
             <View>
               <Text style={styles.foodTitle}>{recipe.name}</Text>
