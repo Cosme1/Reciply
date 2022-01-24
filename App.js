@@ -40,7 +40,7 @@ const Drawer = createDrawerNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="CreateRecipe">
+      <Drawer.Navigator initialRouteName="Recipes">
         <Drawer.Screen name="Recipes" component={RecipeLayout} />
         <Drawer.Screen name="CreateRecipe" component={CreateRecipeLayout} />
       </Drawer.Navigator>

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableHighlight,
   TouchableOpacity,
+  Animated,
 } from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
@@ -17,6 +18,7 @@ import {Food, recipeNameArray} from './CreateRecipeScreen';
 import realm from '../database/Realm';
 import {RecipeItem} from '../components/RecipeItem';
 import {Icon, Button} from 'react-native-elements';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 // export function setNewRecipe(Name, Calories, vegetarian, preptime) {
 //   //store.get('key').then(key => const key);
@@ -107,35 +109,42 @@ export function RecipeLayout({navigation}) {
       },
     });
   }, [navigation, Recipes]);
-  //   let array = listRecipes.map(count => {
-  //     <TouchableHighlight style={{paddingVertical: 5}} key={count}>
-  //       <View style={styles.button}>
-  //         <View>
-  //           <Text style={styles.foodTitle}>{tempname}</Text>
-  //           <Text style={styles.foodSubtitle}>Calories: {tempcalories}</Text>
-  //         </View>
-  //         <Image
-  //           source={require('../assets/pizza.jpg')}
-  //           style={styles.image}></Image>
-  //       </View>
-  //     </TouchableHighlight>;
-  //   });
+
+  const renderRightActions = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [-20, 0, 0, 1],
+    });
+    return (
+      <Animated.View style={styles.deleteButton}>
+        <TouchableOpacity>
+          <Text style={styles.deleteText}>Delete</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    );
+  };
 
   return (
     <ScrollView style={styles.container}>
-      <TouchableHighlight style={{paddingVertical: 5}}>
-        <View style={styles.button}>
-          <View>
-            <Text style={styles.foodTitle}>{Pizza.name}</Text>
-            {veg}
-            <Text style={styles.foodSubtitle}>Calories: {Pizza.calories}</Text>
+      <Swipeable
+        renderRightActions={renderRightActions}
+        //onSwipeableRightOpen={delteRealmObject}
+      >
+        <TouchableHighlight style={{paddingVertical: 5}}>
+          <View style={styles.button}>
+            <View>
+              <Text style={styles.foodTitle}>{Pizza.name}</Text>
+              {veg}
+              <Text style={styles.foodSubtitle}>
+                Calories: {Pizza.calories}
+              </Text>
+            </View>
+            <Image
+              source={require('../assets/pizza.jpg')}
+              style={styles.image}></Image>
           </View>
-          <Image
-            source={require('../assets/pizza.jpg')}
-            style={styles.image}></Image>
-        </View>
-      </TouchableHighlight>
-
+        </TouchableHighlight>
+      </Swipeable>
       <TouchableHighlight style={{paddingVertical: 5}}>
         <View style={styles.button}>
           <View>
@@ -150,29 +159,6 @@ export function RecipeLayout({navigation}) {
       </TouchableHighlight>
       {Recipes.map(_recipe => (
         <RecipeItem key={`${_recipe.id}`} recipe={_recipe} />
-      ))}
-      {recipes.map(recipe => {
-        <TouchableHighlight
-          key={`${recipe.length}`}
-          style={{paddingVertical: 5}}>
-          <View style={styles.button}>
-            <View>
-              <Text style={styles.foodTitle}>{recipe.name}</Text>
-              {recipe.vegetarian ? (
-                <Text style={styles.foodSubtitle}>Vegetarian</Text>
-              ) : null}
-              <Text style={styles.foodSubtitle}>
-                Calories: {recipe.calories}
-              </Text>
-            </View>
-            <Image
-              source={require('../assets/pizza.jpg')}
-              style={styles.image}></Image>
-          </View>
-        </TouchableHighlight>;
-      })}
-      {test.map(tests => (
-        <Text key={tests}>Test {tests}</Text>
       ))}
     </ScrollView>
   );
@@ -226,7 +212,7 @@ export function RecipeLayout({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
@@ -261,6 +247,17 @@ const styles = StyleSheet.create({
   addButton: {
     fontSize: 30,
     fontWeight: '400',
+  },
+  deleteText: {
+    color: '#fcfcfc',
+    fontWeight: 'bold',
+    padding: 3,
+  },
+  deleteView: {
+    color: '#b60000',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
   },
 });
 
