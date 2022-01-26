@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import realm from '../database/Realm';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import {Overlay} from 'react-native-elements/dist/overlay/Overlay';
 
 export function RecipeItem({recipe}) {
   //   const actions = [
@@ -23,11 +24,16 @@ export function RecipeItem({recipe}) {
   console.log(`${realm.id}`);
   console.log(recipe.name);
 
+  const [visible, setVisible] = useState(false);
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  };
+
   const renderRightActions = (progress, dragX) => {
-    const trans = dragX.interpolate({
-      inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1],
-    });
+    // const trans = dragX.interpolate({
+    //   inputRange: [0, 50, 100, 101],
+    //   outputRange: [-20, 0, 0, 1],
+    // });
     return (
       <View style={styles.deleteView}>
         <TouchableOpacity>
@@ -42,26 +48,36 @@ export function RecipeItem({recipe}) {
     });
   };
   return (
-    <Swipeable
-      renderRightActions={renderRightActions}
-      onSwipeableRightOpen={delteRealmObject}>
-      <TouchableHighlight key={realm.id} style={{paddingVertical: 5}}>
-        <View style={styles.button}>
-          <View>
-            <Text style={styles.foodTitle}>{recipe.setname}</Text>
-            {recipe.vegetarian ? (
-              <Text style={styles.foodSubtitle}>Vegetarian</Text>
-            ) : null}
-            <Text style={styles.foodSubtitle}>
-              Calories: {recipe.setcalories}
-            </Text>
+    <>
+      <Swipeable
+        renderRightActions={renderRightActions}
+        onSwipeableRightOpen={delteRealmObject}>
+        <TouchableHighlight
+          key={realm.id}
+          style={{paddingVertical: 5}}
+          onPress={toggleOverlay}
+          underlayColor="#DDDDD">
+          <View style={styles.button}>
+            <View>
+              <Text style={styles.foodTitle}>{recipe.setname}</Text>
+              {recipe.vegetarian ? (
+                <Text style={styles.foodSubtitle}>Vegetarian</Text>
+              ) : null}
+              <Text style={styles.foodSubtitle}>
+                Calories: {recipe.setcalories}
+              </Text>
+              <Text style={styles.foodSubtitle}>
+                Preperation Time: {recipe.setpreptime}min
+              </Text>
+            </View>
+            <Image source={{uri: recipe.image}} style={styles.image}></Image>
           </View>
-          <Image
-            source={require('../assets/pizza.jpg')}
-            style={styles.image}></Image>
-        </View>
-      </TouchableHighlight>
-    </Swipeable>
+        </TouchableHighlight>
+      </Swipeable>
+      <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+        {<Text>Hello</Text>}
+      </Overlay>
+    </>
   );
 }
 
@@ -69,7 +85,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#CCCCCC',
+    backgroundColor: '#CCCCCC', // use #CCCCCC
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

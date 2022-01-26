@@ -62,7 +62,7 @@ function CreateRecipeLayout({route, navigation}) {
       cropping: true,
     }).then(image => {
       setImage(image.path);
-      console.log(image);
+      console.log('Image path:' + image.path);
     });
   };
 
@@ -73,19 +73,15 @@ function CreateRecipeLayout({route, navigation}) {
         setname: name,
         setcalories: calories,
         setpreptime: preptime,
+        image: image,
       });
     });
-    // setRecipe.addListener((obj, changes) => {
-    // 	changes.changedProperties.forEach((changedProperty) => {
-    // 		console.log(
-    // 		  `${obj.name}'s ${changedProperty} was altered to be ${obj[changedProperty]}`
-    // 		);
-    // 	  });
-    // });
 
-    //createRecipe(name, calories, preptime);
+    //clears input fields
+    onChangeName('');
+    onChangeCalories('');
+    onChangePrepTime('');
     navigation.dispatch(CommonActions.goBack()); // goes back to Recipe Screen
-    // remove text fields
   };
 
   const [name, onChangeName] = useState(null);
@@ -134,43 +130,6 @@ function CreateRecipeLayout({route, navigation}) {
     </ScrollView>
   );
 }
-
-// function CreateRecipeScreen({navigation}) {
-//   const Stack = createStackNavigator();
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="CreateRecipes"
-//         component={CreateRecipeLayout}
-//         options={{
-//           title: 'Add Recipe',
-//           headerStyle: {
-//             backgroundColor: '#9fc786',
-//           },
-//           headerTitleStyle: {
-//             color: '#fff',
-//             fontSize: 25,
-//           },
-//           headerLeft: () => (
-//             <View>
-//               <TouchableOpacity
-//                 style={{
-//                   transform: [
-//                     {translateX: -390},
-//                     {scale: 0.045},
-//                     {scaleX: 0.9},
-//                   ],
-//                 }}
-//                 onPress={() => navigation.openDrawer()}>
-//                 <Image source={require('../assets/ScreenButton.png')} />
-//               </TouchableOpacity>
-//             </View>
-//           ),
-//         }}
-//       />
-//     </Stack.Navigator>
-//   );
-// }
 
 const styles = StyleSheet.create({
   input: {
