@@ -18,8 +18,8 @@ export const RecipeSchemaV1 = {
     setcalories: 'string',
     setpreptime: 'string',
     image: 'string?',
-    instructions: {type: 'string?[]'},
-    ingredients: 'string?',
+    instructions: 'string?',
+    ingredients: {type: 'string?[]'},
   },
   primaryKey: 'id',
 };
@@ -27,5 +27,5 @@ export const RecipeSchemaV1 = {
 export default new Realm({
   schema: [RecipeSchemaV1],
   path: 'RealmDatabase.realm',
-  schemaVersion: 3,
+  schemaVersion: 4,
 });

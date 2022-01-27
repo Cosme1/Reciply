@@ -72,9 +72,6 @@ export function RecipeLayout({navigation}) {
     veg = null;
   }
   const [recipes, setrecipes] = useState([]);
-  console.log('length: ', recipes.length);
-  console.log(recipes.toString().length);
-  console.log(JSON.stringify(recipes));
 
   console.log('Objects: ', realm.objects('_Recipe'));
   const Recipes = realm.objects('_Recipe');

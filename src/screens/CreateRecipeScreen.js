@@ -126,7 +126,20 @@ function CreateRecipeLayout({route, navigation}) {
         buttonColor="#9fc786"
         style={{padding: 15}}
       />
-      <Button title="Save" style={{flexbox: 1}} onPress={SaveButton} />
+      <Text style={styles.heading}>Ingredients</Text>
+      <TextInput style={styles.input} />
+      <TextInput style={styles.input} />
+      <TextInput style={styles.input} />
+      <View style={styles.addButton}>
+        <Button title="Add" onPress={null} />
+      </View>
+      <Text style={styles.heading}>Instructions</Text>
+      <TextInput //make this textinput grow in size
+        style={styles.instructionsinput}
+        placeholder="optional"
+        multiline={true}
+      />
+      <Button title="Save" onPress={SaveButton} />
     </ScrollView>
   );
 }
@@ -139,11 +152,29 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
+  instructionsinput: {
+    height: 100,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+
   image: {
     padding: 10,
     margin: 10,
     minHeight: 200,
     resizeMode: 'contain',
+  },
+
+  heading: {
+    padding: 10,
+    fontSize: 30,
+  },
+
+  addButton: {
+    flex: 1,
+    alignSelf: 'flex-start',
+    paddingHorizontal: 3,
   },
 });
 export {recipeNameArray};
