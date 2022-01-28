@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, setState} from 'react';
 import {
   Button,
   View,
@@ -25,8 +25,6 @@ import {DebugInstructions} from 'react-native/Libraries/NewAppScreen';
 import {BSON} from 'realm';
 import realm from '../database/Realm';
 
-const recipeNameArray = [];
-
 const options = [
   {label: 'Carni', value: '1'},
   {label: 'Vegetarian', value: '2'},
@@ -40,19 +38,8 @@ export function Food(name, calories, vegetarian, preptime) {
 }
 
 function CreateRecipeLayout({route, navigation}) {
-  //const {createRecipe} = route.params;
-
-  //   const RecipeSchema = {
-  //     name: '_Recipe',
-  //     properties: {
-  //       _id: 'int',
-  //       setname: 'string',
-  //       setcalories: 'string',
-  //       setpreptime: 'string',
-  //     },
-  //   };
-
-  //let realm = new Realm({schema: [RecipeSchema]});
+  const ingredientsArray = [];
+  let index = 0;
 
   const [image, setImage] = useState(undefined);
   const choosePhotofromLibrary = () => {
@@ -88,6 +75,15 @@ function CreateRecipeLayout({route, navigation}) {
   const [calories, onChangeCalories] = useState(null);
   const [preptime, onChangePrepTime] = useState(null);
   const [vegetarian, onChangeVegetarian] = useState(false);
+  const [ingredients, onChangeIngredients] = useState([0]);
+
+  const addIngredient = () => {
+    ingredientsArray.push(index++);
+    onChangeIngredients(ingredientsArray);
+    console.log('Ingredients', ingredients);
+    console.log('Ingredients array', ingredientsArray);
+    console.log('index', index);
+  };
 
   return (
     <ScrollView>
@@ -127,11 +123,16 @@ function CreateRecipeLayout({route, navigation}) {
         style={{padding: 15}}
       />
       <Text style={styles.heading}>Ingredients</Text>
-      <TextInput style={styles.input} />
-      <TextInput style={styles.input} />
-      <TextInput style={styles.input} />
+      {ingredients.map(ingre => (
+        <TextInput
+          style={styles.input}
+          key={index}
+          value={ingre[ingre.length - 1]}
+        />
+      ))}
+
       <View style={styles.addButton}>
-        <Button title="Add" onPress={null} />
+        <Button title="Add" onPress={addIngredient} />
       </View>
       <Text style={styles.heading}>Instructions</Text>
       <TextInput //make this textinput grow in size
@@ -177,5 +178,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 3,
   },
 });
-export {recipeNameArray};
+
 export default CreateRecipeLayout;

@@ -54,7 +54,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 //     </TouchableHighlight>
 //   );
 // }
-const test = [2, 3, 4];
+
 let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, false, 30);
 
