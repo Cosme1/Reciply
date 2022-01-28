@@ -36,10 +36,11 @@ export function Food(name, calories, vegetarian, preptime) {
   this.vegetarian = vegetarian;
   this.preptime = preptime;
 }
+let index = 1;
 
 function CreateRecipeLayout({route, navigation}) {
   const ingredientsArray = [];
-  let index = 0;
+  
 
   const [image, setImage] = useState(undefined);
   const choosePhotofromLibrary = () => {
@@ -75,14 +76,15 @@ function CreateRecipeLayout({route, navigation}) {
   const [calories, onChangeCalories] = useState(null);
   const [preptime, onChangePrepTime] = useState(null);
   const [vegetarian, onChangeVegetarian] = useState(false);
-  const [ingredients, onChangeIngredients] = useState([0]);
+  const [ingredients, onChangeIngredients] = useState([]);
 
   const addIngredient = () => {
-    ingredientsArray.push(index++);
+    ingredientsArray.push(index);
     onChangeIngredients(ingredientsArray);
     console.log('Ingredients', ingredients);
     console.log('Ingredients array', ingredientsArray);
     console.log('index', index);
+    index = index + 1;
   };
 
   return (
@@ -124,11 +126,7 @@ function CreateRecipeLayout({route, navigation}) {
       />
       <Text style={styles.heading}>Ingredients</Text>
       {ingredients.map(ingre => (
-        <TextInput
-          style={styles.input}
-          key={index}
-          value={ingre[ingre.length - 1]}
-        />
+        <TextInput style={styles.input} key={index} />
       ))}
 
       <View style={styles.addButton}>
