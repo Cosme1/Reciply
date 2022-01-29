@@ -36,8 +36,8 @@ export function Food(name, calories, vegetarian, preptime) {
   this.vegetarian = vegetarian;
   this.preptime = preptime;
 }
-let index = 0;
-const ingredientsArray = [];
+let counter = 1;
+//const ingredientsArray = [1];
 function CreateRecipeLayout({route, navigation}) {
   const [image, setImage] = useState(undefined);
   const choosePhotofromLibrary = () => {
@@ -69,25 +69,25 @@ function CreateRecipeLayout({route, navigation}) {
     navigation.dispatch(CommonActions.goBack()); // goes back to Recipe Screen
   };
 
-  
-
   const [name, onChangeName] = useState(null);
   const [calories, onChangeCalories] = useState(null);
   const [preptime, onChangePrepTime] = useState(null);
   const [vegetarian, onChangeVegetarian] = useState(false);
-  const [ingredients, onChangeIngredients] = useState([]);
+  const [ingredients, onChangeIngredients] = useState([1]);
 
   const addIngredient = () => {
-    ingredientsArray.push(index);
-    console.log('AddIngredients', ingredients);
-    console.log('Ingredients array', ingredientsArray);
-    console.log('index', index);
-    console.log('onChangeIngredients', onChangeIngredients);
-    index++;
+    // ingredientsArray.push(index);
+    onChangeIngredients(ingredientsArray => [...ingredientsArray, ingredients]);
+    // console.log('AddIngredients', ingredients);
+    // console.log('Ingredients array', ingredientsArray);
+    // console.log('index', index);
+    // console.log('onChangeIngredients', onChangeIngredients);
+    // index++;
+    counter++;
   };
-  useEffect(() => {
-    onChangeIngredients(ingredientsArray);
-  }, []);
+  //   useEffect(() => {
+  //     onChangeIngredients(index);
+  //   }, [ingredients]);
   console.log('ingredients', ingredients);
   return (
     <ScrollView>
@@ -131,7 +131,8 @@ function CreateRecipeLayout({route, navigation}) {
         <TextInput
           style={styles.input}
           key={new BSON.ObjectID()}
-          placeholder={index.toString()}
+          placeholder={counter.toString()}
+          value={ingredients}
         />
       ))}
 
