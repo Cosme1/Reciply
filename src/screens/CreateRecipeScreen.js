@@ -1,4 +1,4 @@
-import React, {useState, setState} from 'react';
+import React, {useState, setState, useEffect} from 'react';
 import {
   Button,
   View,
@@ -36,12 +36,9 @@ export function Food(name, calories, vegetarian, preptime) {
   this.vegetarian = vegetarian;
   this.preptime = preptime;
 }
-let index = 1;
-
+let index = 0;
+const ingredientsArray = [];
 function CreateRecipeLayout({route, navigation}) {
-  const ingredientsArray = [];
-  
-
   const [image, setImage] = useState(undefined);
   const choosePhotofromLibrary = () => {
     ImageCropPicker.openPicker({
@@ -72,6 +69,8 @@ function CreateRecipeLayout({route, navigation}) {
     navigation.dispatch(CommonActions.goBack()); // goes back to Recipe Screen
   };
 
+  
+
   const [name, onChangeName] = useState(null);
   const [calories, onChangeCalories] = useState(null);
   const [preptime, onChangePrepTime] = useState(null);
@@ -80,13 +79,16 @@ function CreateRecipeLayout({route, navigation}) {
 
   const addIngredient = () => {
     ingredientsArray.push(index);
-    onChangeIngredients(ingredientsArray);
-    console.log('Ingredients', ingredients);
+    console.log('AddIngredients', ingredients);
     console.log('Ingredients array', ingredientsArray);
     console.log('index', index);
-    index = index + 1;
+    console.log('onChangeIngredients', onChangeIngredients);
+    index++;
   };
-
+  useEffect(() => {
+    onChangeIngredients(ingredientsArray);
+  }, []);
+  console.log('ingredients', ingredients);
   return (
     <ScrollView>
       <Image
@@ -126,7 +128,11 @@ function CreateRecipeLayout({route, navigation}) {
       />
       <Text style={styles.heading}>Ingredients</Text>
       {ingredients.map(ingre => (
-        <TextInput style={styles.input} key={index} />
+        <TextInput
+          style={styles.input}
+          key={new BSON.ObjectID()}
+          placeholder={index.toString()}
+        />
       ))}
 
       <View style={styles.addButton}>
