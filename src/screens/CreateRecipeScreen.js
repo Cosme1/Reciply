@@ -36,8 +36,7 @@ export function Food(name, calories, vegetarian, preptime) {
   this.vegetarian = vegetarian;
   this.preptime = preptime;
 }
-let counter = 1;
-//const ingredientsArray = [1];
+let counter = 0;
 function CreateRecipeLayout({route, navigation}) {
   const [image, setImage] = useState(undefined);
   const choosePhotofromLibrary = () => {
@@ -59,6 +58,7 @@ function CreateRecipeLayout({route, navigation}) {
         setcalories: calories,
         setpreptime: preptime,
         image: image,
+        ingredients: ingredientElement,
       });
     });
 
@@ -73,22 +73,19 @@ function CreateRecipeLayout({route, navigation}) {
   const [calories, onChangeCalories] = useState(null);
   const [preptime, onChangePrepTime] = useState(null);
   const [vegetarian, onChangeVegetarian] = useState(false);
-  const [ingredients, onChangeIngredients] = useState([1]);
+  const [ingredients, onChangeIngredients] = useState([]);
+  const [ingredientElement, setIngredientElement] = useState([]);
 
   const addIngredient = () => {
-    // ingredientsArray.push(index);
-    onChangeIngredients(ingredientsArray => [...ingredientsArray, ingredients]);
-    // console.log('AddIngredients', ingredients);
-    // console.log('Ingredients array', ingredientsArray);
-    // console.log('index', index);
-    // console.log('onChangeIngredients', onChangeIngredients);
-    // index++;
+
+    onChangeIngredients(ingredientsArray => [...ingredientsArray, counter]);
+
     counter++;
   };
   //   useEffect(() => {
   //     onChangeIngredients(index);
   //   }, [ingredients]);
-  console.log('ingredients', ingredients);
+
   return (
     <ScrollView>
       <Image
@@ -131,8 +128,9 @@ function CreateRecipeLayout({route, navigation}) {
         <TextInput
           style={styles.input}
           key={new BSON.ObjectID()}
-          placeholder={counter.toString()}
-          value={ingredients}
+          placeholder={ingredients.indexOf(ingre).toString()}
+          onChangeText={setIngredientElement[counter]}
+          value={ingredientElement[counter]}
         />
       ))}
 

@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {
-  AppRegistry,
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableHighlight,
-  TouchableOpacity,
-  Animated,
+	AppRegistry,
+	View,
+	Text,
+	ScrollView,
+	StyleSheet,
+	TouchableHighlight,
+	TouchableOpacity,
+	Animated,
 } from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
@@ -17,8 +17,10 @@ import CreateRecipeLayout from './CreateRecipeScreen';
 import {Food, recipeNameArray} from './CreateRecipeScreen';
 import realm from '../database/Realm';
 import {RecipeItem} from '../components/RecipeItem';
-import {Icon, Button} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Overlay} from 'react-native-elements/dist/overlay/Overlay';
 
 // export function setNewRecipe(Name, Calories, vegetarian, preptime) {
 //   //store.get('key').then(key => const key);
@@ -58,107 +60,185 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, false, 30);
 
-// function GetRecipe() {
-//   Realm.open({schema: [RecipeSchema]});
-//   console.log(Realm.objects('_Recipe'));
-//   const recipesData = Realm.objects('_Recipe');
-//   setrecipes(recipesData);
-// }
+const NameArray = []
+
+function sortByName (recipesObject) {
+
+	//console.log(Object.values(recipesObject))
+	/* 
+		creates array but getting the name from each realmObject and put them together into an array
+	*/
+
+	for (let i = 0; i < recipesObject.length; i++){
+		const names = realm.objects('_Recipe')[i]
+		NameArray[i] = names.setname
+		console.log(NameArray)
+	}
+	
+	console.log(quicksort(NameArray))
+	/*
+		compares each string in the array and uses a quicksort to sort alphabetically
+	*/
+
+	function quicksort (arr) {
+
+		if(arr.length < 2) return arr
+		
+		const pivot = arr[arr.length - 1]
+		const left = []
+		const right = []
+		var start = 0
+
+		while (start < arr.length - 1) {
+			if (arr[start] < pivot) left.push(arr[start])
+			else right.push(arr[start])
+			start++
+		}
+
+		return [...quicksort(left), pivot, ...quicksort(right)]
+
+	}
+
+	/*
+		Update realmObject by overwriting it with the quicksort function
+	*/
+
+	realm.write(() => {
+		for(let i = 0; i < recipesObject.length; i++) {
+			const names = realm.objects('_Recipe')[i]
+			names.setname = quicksort(NameArray)[i]
+		}
+	})
+
+}
+
+const sortByCalories = (recipesObject) => {
+
+}
+
+const sortByPreperationtime = (recipesObject) => {
+	
+}
+const Recipes = realm.objects('_Recipe');
 export function RecipeLayout({navigation}) {
-  let veg;
-  if (Pizza.vegetarian === true) {
-    veg = <Text style={styles.foodSubtitle}>Vegetarian</Text>;
-  } else {
-    veg = null;
-  }
-  const [recipes, setrecipes] = useState([]);
+	let veg;
+	if (Pizza.vegetarian === true) {
+		veg = <Text style={styles.foodSubtitle}>Vegetarian</Text>;
+	} else {
+		veg = null;
+	}
+	const [recipes, setrecipes] = useState([]);
 
-  console.log('Objects: ', realm.objects('_Recipe'));
-  const Recipes = realm.objects('_Recipe');
-  console.log(
-    `These are all recipes: ${Recipes.map(Recipe => Recipe.setname)}`,
-  );
-  realm.addListener('change', () => {
-    setrecipes([Recipes]);
-    console.log(`Added ${Recipes.toJSON}`);
-  });
-  useEffect(() => {
-    // Realm.open({
-    //   path: 'RealmDatabase.realm',
-    //   schema: [RecipeSchema],
-    // }).then(realm => {
-    //   setrecipes([realm]);
-    // });
-    //console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.name)}`);
-    //setrecipes([Recipes]);
+	console.log('Objects: ', realm.objects('_Recipe'));
+	const Recipes = realm.objects('_Recipe');
+	console.log(
+		`These are all recipes: ${Recipes.map(Recipe => Recipe.setname)}`,
+	);
+	realm.addListener('change', () => {
+		setrecipes([Recipes]);
+		console.log(`Added ${Recipes.toJSON}`);
+	});
+	const [visible, setVisible] = useState(false);
+	const toggleOverlay = React.useCallback(() => {
+		setVisible(!visible);
+	}, [visible]);
+	useEffect(() => {
+		// Realm.open({
+		//   path: 'RealmDatabase.realm',
+		//   schema: [RecipeSchema],
+		// }).then(realm => {
+		//   setrecipes([realm]);
+		// });
+		//console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.name)}`);
+		//setrecipes([Recipes]);
 
-    navigation.setOptions({
-      headerRight: function Header() {
-        return (
-          <Button
-            type="clear"
-            title="&#x2b;"
-            onPress={() => navigation.navigate('CreateRecipe')}
-            titleStyle={styles.addButton}
-            //style={{transform: [{scale: 0.12}, {translateX: 900}]}}
-          />
-        );
-      },
-    });
-  }, [navigation, Recipes]);
+		navigation.setOptions({
+			headerRight: function Header() {
+				return (
+					<View style={{flexDirection: 'row'}}>
+						{/* <Icon name="sort" size={20} onPress={sortOverlay} />  */}
+						<Button
+							type="clear"
+							title="&#61;"
+							onPress={() => setVisible(true)}
+							titleStyle={styles.addButton}
+							//style={{transform: [{scale: 0.12}, {translateX: 900}]}}
+						/>
+						<Button
+							type="clear"
+							title="&#x2b;"
+							onPress={() => navigation.navigate('CreateRecipe')}
+							titleStyle={styles.addButton}
+							//style={{transform: [{scale: 0.12}, {translateX: 900}]}}
+						/>
+					</View>
+				);
+			},
+		});
+	}, [navigation, Recipes, toggleOverlay]);
 
-  const renderRightActions = (progress, dragX) => {
-    const trans = dragX.interpolate({
-      inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1],
-    });
-    return (
-      <Animated.View style={styles.deleteButton}>
-        <TouchableOpacity>
-          <Text style={styles.deleteText}>Delete</Text>
-        </TouchableOpacity>
-      </Animated.View>
-    );
-  };
+	const renderRightActions = (progress, dragX) => {
+		const trans = dragX.interpolate({
+			inputRange: [0, 50, 100, 101],
+			outputRange: [-20, 0, 0, 1],
+		});
+		return (
+			<Animated.View style={styles.deleteButton}>
+				<TouchableOpacity>
+					<Text style={styles.deleteText}>Delete</Text>
+				</TouchableOpacity>
+			</Animated.View>
+		);
+	};
 
-  return (
-    <ScrollView style={styles.container}>
-      <Swipeable
-        renderRightActions={renderRightActions}
-        //onSwipeableRightOpen={delteRealmObject}
-      >
-        <TouchableHighlight style={{paddingVertical: 5}}>
-          <View style={styles.button}>
-            <View>
-              <Text style={styles.foodTitle}>{Pizza.name}</Text>
-              {veg}
-              <Text style={styles.foodSubtitle}>
-                Calories: {Pizza.calories}
-              </Text>
-            </View>
-            <Image
-              source={require('../assets/pizza.jpg')}
-              style={styles.image}></Image>
-          </View>
-        </TouchableHighlight>
-      </Swipeable>
-      <TouchableHighlight style={{paddingVertical: 5}}>
-        <View style={styles.button}>
-          <View>
-            <Text style={styles.foodTitle}>{Pasta.name}</Text>
-            {veg}
-            <Text style={styles.foodSubtitle}>Calories: {Pasta.calories}</Text>
-          </View>
-          <Image
-            source={require('../assets/pizza.jpg')}
-            style={styles.image}></Image>
-        </View>
-      </TouchableHighlight>
-      {Recipes.map(_recipe => (
-        <RecipeItem key={`${_recipe.id}`} recipe={_recipe} />
-      ))}
-    </ScrollView>
-  );
+	return (
+		<ScrollView style={styles.container}>
+			<Swipeable
+				renderRightActions={renderRightActions}
+				//onSwipeableRightOpen={delteRealmObject}
+			>
+				<TouchableHighlight style={{paddingVertical: 5}}>
+					<View style={styles.button}>
+						<View>
+							<Text style={styles.foodTitle}>{Pizza.name}</Text>
+							{veg}
+							<Text style={styles.foodSubtitle}>
+								Calories: {Pizza.calories}
+							</Text>
+						</View>
+						<Image
+							source={require('../assets/pizza.jpg')}
+							style={styles.image}></Image>
+					</View>
+				</TouchableHighlight>
+			</Swipeable>
+			<TouchableHighlight style={{paddingVertical: 5}}>
+				<View style={styles.button}>
+					<View>
+						<Text style={styles.foodTitle}>{Pasta.name}</Text>
+						{veg}
+						<Text style={styles.foodSubtitle}>Calories: {Pasta.calories}</Text>
+					</View>
+					<Image
+						source={require('../assets/pizza.jpg')}
+						style={styles.image}></Image>
+				</View>
+			</TouchableHighlight>
+			{Recipes.map(_recipe => (
+				<RecipeItem key={`${_recipe.id}`} recipe={_recipe} />
+			))}
+			<Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+				{
+					<View>
+						<Text style={styles.overlayText}>Sort by</Text>
+						<Button title="Sort by Name" onPress={() => sortByName(Recipes)} />
+						<Button title="Sort by Calories" onPress={sortByCalories(Recipes)} />
+						<Button title="Sort by Preperation Time" onPress={sortByPreperationtime(Recipes)} />
+					</View>
+				}
+			</Overlay>
+		</ScrollView>
+	);
 }
 
 // function RecipesScreen({navigation}) {
@@ -208,54 +288,59 @@ export function RecipeLayout({navigation}) {
 // }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-  },
-  button: {
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: '#CCCCCC',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  image: {
-    width: 90,
-    height: 90,
-    borderRadius: 10,
-  },
+	container: {
+		flexGrow: 1,
+		paddingHorizontal: 10,
+		paddingVertical: 10,
+	},
+	button: {
+		padding: 10,
+		borderRadius: 10,
+		backgroundColor: '#CCCCCC',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	image: {
+		width: 90,
+		height: 90,
+		borderRadius: 10,
+	},
 
-  foodTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
+	foodTitle: {
+		fontSize: 20,
+		fontWeight: 'bold',
+	},
 
-  foodSubtitle: {
-    fontSize: 10,
-    color: 'black',
-  },
+	foodSubtitle: {
+		fontSize: 10,
+		color: 'black',
+	},
 
-  vegetarian: {
-    fontSize: 10,
-    color: 'green', //edit that later on
-  },
+	vegetarian: {
+		fontSize: 10,
+		color: 'green', //edit that later on
+	},
 
-  addButton: {
-    fontSize: 30,
-    fontWeight: '400',
-  },
-  deleteText: {
-    color: '#fcfcfc',
-    fontWeight: 'bold',
-    padding: 3,
-  },
-  deleteView: {
-    color: '#b60000',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    height: '100%',
-  },
+	addButton: {
+		fontSize: 30,
+		fontWeight: '400',
+	},
+	deleteText: {
+		color: '#fcfcfc',
+		fontWeight: 'bold',
+		padding: 3,
+	},
+	deleteView: {
+		color: '#b60000',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		height: '100%',
+	},
+	overlayText: {
+		fontSize: 20,
+		padding: 3,
+	},
+	overlayButton: {},
 });
 
 //export default RecipesScreen;

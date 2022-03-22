@@ -21,8 +21,6 @@ export function RecipeItem({recipe}) {
   //       },
   //     },
   //   ];
-  console.log(`${realm.id}`);
-  console.log(recipe.name);
 
   const [visible, setVisible] = useState(false);
   const toggleOverlay = () => {
@@ -47,6 +45,7 @@ export function RecipeItem({recipe}) {
       realm.delete(recipe);
     });
   };
+  console.log(recipe.image);
   return (
     <>
       <Swipeable
