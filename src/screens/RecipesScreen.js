@@ -61,6 +61,30 @@ let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, false, 30);
 
 const NameArray = []
+const CaloriesArray = []
+const PrepTimeArray = []
+
+/*
+		compares each string in the array and uses a quicksort to sort in order
+*/
+
+function quicksort (arr, start = 0) {
+
+	if(arr.length < 2) return arr
+	
+	const pivot = arr[arr.length - 1]
+	const left = []
+	const right = []
+
+	while (start < arr.length - 1) {
+		if (arr[start] < pivot) left.push(arr[start])
+		else right.push(arr[start])
+		start++
+	}
+
+	return [...quicksort(left), pivot, ...quicksort(right)]
+
+}
 
 function sortByName (recipesObject) {
 
@@ -76,50 +100,55 @@ function sortByName (recipesObject) {
 	}
 	
 	console.log(quicksort(NameArray))
-	/*
-		compares each string in the array and uses a quicksort to sort alphabetically
-	*/
-
-	function quicksort (arr) {
-
-		if(arr.length < 2) return arr
-		
-		const pivot = arr[arr.length - 1]
-		const left = []
-		const right = []
-		var start = 0
-
-		while (start < arr.length - 1) {
-			if (arr[start] < pivot) left.push(arr[start])
-			else right.push(arr[start])
-			start++
-		}
-
-		return [...quicksort(left), pivot, ...quicksort(right)]
-
-	}
 
 	/*
 		Update realmObject by overwriting it with the quicksort function
 	*/
 
+	const temp = []
+
 	realm.write(() => {
 		for(let i = 0; i < recipesObject.length; i++) {
 			const names = realm.objects('_Recipe')[i]
-			names.setname = quicksort(NameArray)[i]
+			if (names.setname > quicksort(NameArray[i])){
+				for (let j = 0; j < recipesObject.length; j++) {
+					const namesJ = realm.objects('_Recipe')[j]
+					if (namesJ.setname === quicksort(NameArray[i])) {
+						temp = names[i]
+						names[i] = names[j]
+						names[j] = temp
+					}
+				}
+			}
 		}
 	})
 
 }
 
-const sortByCalories = (recipesObject) => {
+function sortByCalories (recipesObject) {
+	for (let i = 0; i < recipesObject.length; i++){
+		const calories = realm.objects('_Recipe')[i]
+		CaloriesArray[i] = parseInt(calories.setcalories)
+		console.log(CaloriesArray)
+	}
+
+	console.log("calories: " + quicksort(CaloriesArray))
+
+	realm.write(() => {
+		for(let i = 0; i < recipesObject.length; i++) {
+			const calories = realm.objects('_Recipe')[i]
+			calories.setcalories = quicksort(CaloriesArray)[i].toString()
+		}
+	})
 
 }
 
-const sortByPreperationtime = (recipesObject) => {
+function sortByPreperationtime (recipesObject) {
 	
 }
+
 const Recipes = realm.objects('_Recipe');
+
 export function RecipeLayout({navigation}) {
 	let veg;
 	if (Pizza.vegetarian === true) {
@@ -232,8 +261,8 @@ export function RecipeLayout({navigation}) {
 					<View>
 						<Text style={styles.overlayText}>Sort by</Text>
 						<Button title="Sort by Name" onPress={() => sortByName(Recipes)} />
-						<Button title="Sort by Calories" onPress={sortByCalories(Recipes)} />
-						<Button title="Sort by Preperation Time" onPress={sortByPreperationtime(Recipes)} />
+						<Button title="Sort by Calories" onPress={() => sortByCalories(Recipes)} />
+						<Button title="Sort by Preperation Time" onPress={() => sortByPreperationtime(Recipes)} />
 					</View>
 				}
 			</Overlay>

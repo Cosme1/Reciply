@@ -40,7 +40,7 @@ export function RecipeItem({recipe}) {
       </View>
     );
   };
-  const delteRealmObject = () => {
+  const deleteRealmObject = () => {
     realm.write(() => {
       realm.delete(recipe);
     });
@@ -50,7 +50,7 @@ export function RecipeItem({recipe}) {
     <>
       <Swipeable
         renderRightActions={renderRightActions}
-        onSwipeableRightOpen={delteRealmObject}>
+        onSwipeableRightOpen={deleteRealmObject}>
         <TouchableHighlight
           key={realm.id}
           style={{paddingVertical: 5}}
