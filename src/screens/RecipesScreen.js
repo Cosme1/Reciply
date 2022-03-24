@@ -100,27 +100,26 @@ function sortByName (recipesObject) {
 	}
 	
 	console.log(quicksort(NameArray))
+	console.log()
 
 	/*
 		Update realmObject by overwriting it with the quicksort function
 	*/
 
-	const temp = []
+	var temp = []
 
 	realm.write(() => {
-		for(let i = 0; i < recipesObject.length; i++) {
+		for(let i = 0; i < recipesObject.length - 1; i++) {
 			const names = realm.objects('_Recipe')[i]
+			const names1 = realm.objects('_Recipe')[i+1]
 			if (names.setname > quicksort(NameArray[i])){
-				for (let j = 0; j < recipesObject.length; j++) {
-					const namesJ = realm.objects('_Recipe')[j]
-					if (namesJ.setname === quicksort(NameArray[i])) {
-						temp = names[i]
-						names[i] = names[j]
-						names[j] = temp
-					}
-				}
+						temp = recipesObject[i]
+						recipesObject[i] = recipesObject[i+1]
+						recipesObject[i+1] = temp
 			}
 		}
+
+		
 	})
 
 }
@@ -158,7 +157,7 @@ export function RecipeLayout({navigation}) {
 	}
 	const [recipes, setrecipes] = useState([]);
 
-	console.log('Objects: ', realm.objects('_Recipe'));
+
 	const Recipes = realm.objects('_Recipe');
 	console.log(
 		`These are all recipes: ${Recipes.map(Recipe => Recipe.setname)}`,
