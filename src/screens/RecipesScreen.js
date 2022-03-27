@@ -60,9 +60,6 @@ import {Overlay} from 'react-native-elements/dist/overlay/Overlay';
 let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, false, 30);
 
-const NameArray = []
-const CaloriesArray = []
-const PrepTimeArray = []
 
 /*
 		compares each string in the array and uses a quicksort to sort in order
@@ -92,35 +89,32 @@ function sortByName (recipesObject) {
 	/* 
 		creates array but getting the name from each realmObject and put them together into an array
 	*/
-
-	for (let i = 0; i < recipesObject.length; i++){
-		const names = realm.objects('_Recipe')[i]
-		NameArray[i] = names.setname
-		console.log(NameArray)
-	}
+	let name = realm.objects('_Recipe')
+	// for (let i = 0; i < recipesObject.length; i++){
+	// 	const names = realm.objects('_Recipe')[i]
+	// 	NameArray[i] = names.setname
+	// 	console.log(NameArray)
+	// }
 	
-	console.log(quicksort(NameArray))
-	console.log()
+	console.log(quicksort(name.map(name => name.setname)))
 
 	/*
 		Update realmObject by overwriting it with the quicksort function
 	*/
 
-	var temp = []
-
-	realm.write(() => {
-		for(let i = 0; i < recipesObject.length - 1; i++) {
-			const names = realm.objects('_Recipe')[i]
-			const names1 = realm.objects('_Recipe')[i+1]
-			if (names.setname > quicksort(NameArray[i])){
-						temp = recipesObject[i]
-						recipesObject[i] = recipesObject[i+1]
-						recipesObject[i+1] = temp
+	let temp = new Object()
+	
+		for(let i = 0; i < recipesObject.length; i++) {
+			
+			if (name[i].setname > quicksort(name.map(name => name.setname))){
+				realm.write(() => {
+						temp = name[i]
+						name[i].set(name[i+1])
+						name[i+1].set(temp)
+				})
+				console.log(name.map(namee => namee.setname))
 			}
 		}
-
-		
-	})
 
 }
 
@@ -164,21 +158,12 @@ export function RecipeLayout({navigation}) {
 	);
 	realm.addListener('change', () => {
 		setrecipes([Recipes]);
-		console.log(`Added ${Recipes.toJSON}`);
 	});
 	const [visible, setVisible] = useState(false);
 	const toggleOverlay = React.useCallback(() => {
 		setVisible(!visible);
 	}, [visible]);
 	useEffect(() => {
-		// Realm.open({
-		//   path: 'RealmDatabase.realm',
-		//   schema: [RecipeSchema],
-		// }).then(realm => {
-		//   setrecipes([realm]);
-		// });
-		//console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.name)}`);
-		//setrecipes([Recipes]);
 
 		navigation.setOptions({
 			headerRight: function Header() {
