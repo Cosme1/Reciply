@@ -14,7 +14,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Image} from 'react-native-elements/dist/image/Image';
 import CreateRecipeLayout from './CreateRecipeScreen';
-import {Food, recipeNameArray} from './CreateRecipeScreen';
+import {Food} from './CreateRecipeScreen';
 import realm from '../database/Realm';
 import {RecipeItem} from '../components/RecipeItem';
 import {Button} from 'react-native-elements';
@@ -60,85 +60,87 @@ import {Overlay} from 'react-native-elements/dist/overlay/Overlay';
 let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, false, 30);
 
-
+let recipesArray = [];
 /*
 		compares each string in the array and uses a quicksort to sort in order
 */
 
-function quicksort (arr, start = 0) {
+function quicksort(arr, pos = 0) {
+	if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
 
-	if(arr.length < 2) return arr
-	
-	const pivot = arr[arr.length - 1]
-	const left = []
-	const right = []
+	const pivot = arr[arr.length - 1];
+	const left = [];
+	const right = [];
 
-	while (start < arr.length - 1) {
-		if (arr[start] < pivot) left.push(arr[start])
-		else right.push(arr[start])
-		start++
+	while (pos < arr.length - 1) {
+		if (arr[pos] < pivot) left.push(arr[pos]);
+		else right.push(arr[pos]);
+		pos++;
 	}
 
-	return [...quicksort(left), pivot, ...quicksort(right)]
-
+	return [...quicksort(left), pivot, ...quicksort(right)];
 }
 
-function sortByName (recipesObject) {
-
+function sortByName(arr, pos = 0) {
 	//console.log(Object.values(recipesObject))
 	/* 
 		creates array but getting the name from each realmObject and put them together into an array
 	*/
-	let name = realm.objects('_Recipe')
 	// for (let i = 0; i < recipesObject.length; i++){
 	// 	const names = realm.objects('_Recipe')[i]
 	// 	NameArray[i] = names.setname
 	// 	console.log(NameArray)
 	// }
-	
-	console.log(quicksort(name.map(name => name.setname)))
-
 	/*
 		Update realmObject by overwriting it with the quicksort function
 	*/
+	// let temp = [];
+	// let sortedArr = quicksort(recipesArray.map(r => r.setname));
+	// for (let i = 0; i < recipesArray.length; i++) {
+	// 	console.log(sortedArr[i]);
+	// 	console.log('i' + recipesArray[i].setname);
+	// 	console.log('i+1' + recipesArray[i + 1].setname);
+	// 	if (recipesArray[i].setname !== sortedArr[i]) {
+	// 		temp = recipesArray[i];
+	// 		recipesArray[i] = recipesArray[i + 1];
+	// 		recipesArray[i + 1] = temp;
+	// 		i = -1;
+	// 	}
+	// }
+	// console.log(recipesArray.map(r => r.setname));
+	if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
 
-	let temp = new Object()
-	
-		for(let i = 0; i < recipesObject.length; i++) {
-			
-			if (name[i].setname > quicksort(name.map(name => name.setname))){
-				realm.write(() => {
-						temp = name[i]
-						name[i].set(name[i+1])
-						name[i+1].set(temp)
-				})
-				console.log(name.map(namee => namee.setname))
-			}
-		}
+	const pivot = arr[arr.length - 1].setname;
+	const left = [];
+	const right = [];
 
-}
-
-function sortByCalories (recipesObject) {
-	for (let i = 0; i < recipesObject.length; i++){
-		const calories = realm.objects('_Recipe')[i]
-		CaloriesArray[i] = parseInt(calories.setcalories)
-		console.log(CaloriesArray)
+	while (pos < arr.length - 1) {
+		if (arr[pos].setname < pivot) left.push(arr[pos]);
+		else right.push(arr[pos]);
+		pos++;
 	}
 
-	console.log("calories: " + quicksort(CaloriesArray))
+	recipesArray = [...quicksort(left), pivot, ...quicksort(right)];
+}
+
+function sortByCalories(recipesObject) {
+	for (let i = 0; i < recipesObject.length; i++) {
+		const calories = realm.objects('_Recipe')[i];
+		CaloriesArray[i] = parseInt(calories.setcalories);
+		console.log(CaloriesArray);
+	}
+
+	console.log('calories: ' + quicksort(CaloriesArray));
 
 	realm.write(() => {
-		for(let i = 0; i < recipesObject.length; i++) {
-			const calories = realm.objects('_Recipe')[i]
-			calories.setcalories = quicksort(CaloriesArray)[i].toString()
+		for (let i = 0; i < recipesObject.length; i++) {
+			const calories = realm.objects('_Recipe')[i];
+			calories.setcalories = quicksort(CaloriesArray)[i].toString();
 		}
-	})
-
+	});
 }
 
-function sortByPreperationtime (recipesObject) {
-	
-}
+function sortByPreperationtime(recipesObject) {}
 
 const Recipes = realm.objects('_Recipe');
 
@@ -151,20 +153,26 @@ export function RecipeLayout({navigation}) {
 	}
 	const [recipes, setrecipes] = useState([]);
 
-
 	const Recipes = realm.objects('_Recipe');
-	console.log(
-		`These are all recipes: ${Recipes.map(Recipe => Recipe.setname)}`,
-	);
+	while (Recipes.length >= recipesArray) {
+		for (let i = 0; i < Recipes.length; i++) {
+			recipesArray.push(Recipes[i]);
+		}
+	}
+
+	//recipesArray.push(Recipes.filter(recipe => recipe))
+	console.log(recipesArray.filter(r => r));
+	console.log(Recipes.filter(recipe => recipe));
+	console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.setname)}`);
 	realm.addListener('change', () => {
 		setrecipes([Recipes]);
+		console.log('Something happened!');
 	});
 	const [visible, setVisible] = useState(false);
 	const toggleOverlay = React.useCallback(() => {
 		setVisible(!visible);
 	}, [visible]);
 	useEffect(() => {
-
 		navigation.setOptions({
 			headerRight: function Header() {
 				return (
@@ -215,9 +223,7 @@ export function RecipeLayout({navigation}) {
 						<View>
 							<Text style={styles.foodTitle}>{Pizza.name}</Text>
 							{veg}
-							<Text style={styles.foodSubtitle}>
-								Calories: {Pizza.calories}
-							</Text>
+							<Text style={styles.foodSubtitle}>Calories: {Pizza.calories}</Text>
 						</View>
 						<Image
 							source={require('../assets/pizza.jpg')}
@@ -237,16 +243,19 @@ export function RecipeLayout({navigation}) {
 						style={styles.image}></Image>
 				</View>
 			</TouchableHighlight>
-			{Recipes.map(_recipe => (
+			{recipesArray.map(_recipe => (
 				<RecipeItem key={`${_recipe.id}`} recipe={_recipe} />
 			))}
 			<Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
 				{
 					<View>
 						<Text style={styles.overlayText}>Sort by</Text>
-						<Button title="Sort by Name" onPress={() => sortByName(Recipes)} />
-						<Button title="Sort by Calories" onPress={() => sortByCalories(Recipes)} />
-						<Button title="Sort by Preperation Time" onPress={() => sortByPreperationtime(Recipes)} />
+						<Button title="Sort by Name" onPress={() => sortByName(recipesArray)} />
+						<Button title="Sort by Calories" onPress={() => sortByCalories()} />
+						<Button
+							title="Sort by Preperation Time"
+							onPress={() => sortByPreperationtime()}
+						/>
 					</View>
 				}
 			</Overlay>

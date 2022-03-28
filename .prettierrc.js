@@ -6,5 +6,4 @@ module.exports = {
   arrowParens: 'avoid',
   useTabs: true,
   tabWidth: 1
-  trailingSpaces: true,
 };
