@@ -81,7 +81,7 @@ function quicksort(arr, pos = 0) {
 	return [...quicksort(left), pivot, ...quicksort(right)];
 }
 
-function sortByName(arr, pos = 0) {
+function sortByName() {
 	//console.log(Object.values(recipesObject))
 	/* 
 		creates array but getting the name from each realmObject and put them together into an array
@@ -108,19 +108,24 @@ function sortByName(arr, pos = 0) {
 	// 	}
 	// }
 	// console.log(recipesArray.map(r => r.setname));
-	if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
+	function quicksortName(arr, pos = 0) {
+		if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
 
-	const pivot = arr[arr.length - 1].setname;
-	const left = [];
-	const right = [];
+		const pivot = arr[arr.length - 1].setname;
+		const pivotObject = arr[arr.length - 1];
+		const left = [];
+		const right = [];
 
-	while (pos < arr.length - 1) {
-		if (arr[pos].setname < pivot) left.push(arr[pos]);
-		else right.push(arr[pos]);
-		pos++;
+		while (pos < arr.length - 1) {
+			if (arr[pos].setname < pivot) left.push(arr[pos]);
+			else right.push(arr[pos]);
+			pos++;
+		}
+
+		return [...quicksortName(left), pivotObject, ...quicksortName(right)];
 	}
 
-	recipesArray = [...quicksort(left), pivot, ...quicksort(right)];
+	recipesArray = quicksortName(recipesArray);
 }
 
 function sortByCalories(recipesObject) {
