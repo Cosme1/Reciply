@@ -65,22 +65,6 @@ let recipesArray = [];
 		compares each string in the array and uses a quicksort to sort in order
 */
 
-function quicksort(arr, pos = 0) {
-	if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
-
-	const pivot = arr[arr.length - 1];
-	const left = [];
-	const right = [];
-
-	while (pos < arr.length - 1) {
-		if (arr[pos] < pivot) left.push(arr[pos]);
-		else right.push(arr[pos]);
-		pos++;
-	}
-
-	return [...quicksort(left), pivot, ...quicksort(right)];
-}
-
 function sortByName() {
 	//console.log(Object.values(recipesObject))
 	/* 
@@ -128,26 +112,47 @@ function sortByName() {
 	recipesArray = quicksortName(recipesArray);
 }
 
-function sortByCalories(recipesObject) {
-	for (let i = 0; i < recipesObject.length; i++) {
-		const calories = realm.objects('_Recipe')[i];
-		CaloriesArray[i] = parseInt(calories.setcalories);
-		console.log(CaloriesArray);
+function sortByCalories() {
+	function quicksortCalories(arr, pos = 0) {
+		if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
+
+		const pivot = arr[arr.length - 1].setcalories;
+		const pivotObject = arr[arr.length - 1];
+		const left = [];
+		const right = [];
+
+		while (pos < arr.length - 1) {
+			if (arr[pos].setcalories < pivot) left.push(arr[pos]);
+			else right.push(arr[pos]);
+			pos++;
+		}
+
+		return [...quicksortCalories(left), pivotObject, ...quicksortCalories(right)];
 	}
 
-	console.log('calories: ' + quicksort(CaloriesArray));
-
-	realm.write(() => {
-		for (let i = 0; i < recipesObject.length; i++) {
-			const calories = realm.objects('_Recipe')[i];
-			calories.setcalories = quicksort(CaloriesArray)[i].toString();
-		}
-	});
+	recipesArray = quicksortCalories(recipesArray);
 }
 
-function sortByPreperationtime(recipesObject) {}
+function sortByPreperationtime() {
+	function quicksortPreptime(arr, pos = 0) {
+		if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
 
-const Recipes = realm.objects('_Recipe');
+		const pivot = arr[arr.length - 1].setpreptime;
+		const pivotObject = arr[arr.length - 1];
+		const left = [];
+		const right = [];
+		console.log(pivot);
+		while (pos < arr.length - 1) {
+			if (arr[pos].setpreptime < pivot) left.push(arr[pos]);
+			else right.push(arr[pos]);
+			pos++;
+		}
+
+		return [...quicksortPreptime(left), pivotObject, ...quicksortPreptime(right)];
+	}
+
+	recipesArray = quicksortPreptime(recipesArray);
+}
 
 export function RecipeLayout({navigation}) {
 	let veg;
@@ -157,7 +162,6 @@ export function RecipeLayout({navigation}) {
 		veg = null;
 	}
 	const [recipes, setrecipes] = useState([]);
-
 	const Recipes = realm.objects('_Recipe');
 	while (Recipes.length >= recipesArray) {
 		for (let i = 0; i < Recipes.length; i++) {
@@ -166,9 +170,11 @@ export function RecipeLayout({navigation}) {
 	}
 
 	//recipesArray.push(Recipes.filter(recipe => recipe))
-	console.log(recipesArray.filter(r => r));
-	console.log(Recipes.filter(recipe => recipe));
+
 	console.log(`These are all recipes: ${Recipes.map(Recipe => Recipe.setname)}`);
+	console.log(
+		`These are all ingredients: ${Recipes.map(Recipe => Recipe.ingredients)}`,
+	);
 	realm.addListener('change', () => {
 		setrecipes([Recipes]);
 		console.log('Something happened!');
@@ -201,7 +207,7 @@ export function RecipeLayout({navigation}) {
 				);
 			},
 		});
-	}, [navigation, Recipes, toggleOverlay]);
+	}, [navigation, toggleOverlay]); // remember Recipes value
 
 	const renderRightActions = (progress, dragX) => {
 		const trans = dragX.interpolate({
@@ -255,7 +261,7 @@ export function RecipeLayout({navigation}) {
 				{
 					<View>
 						<Text style={styles.overlayText}>Sort by</Text>
-						<Button title="Sort by Name" onPress={() => sortByName(recipesArray)} />
+						<Button title="Sort by Name" onPress={() => sortByName()} />
 						<Button title="Sort by Calories" onPress={() => sortByCalories()} />
 						<Button
 							title="Sort by Preperation Time"
@@ -370,4 +376,4 @@ const styles = StyleSheet.create({
 	overlayButton: {},
 });
 
-//export default RecipesScreen;
+export {recipesArray};
