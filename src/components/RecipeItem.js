@@ -11,7 +11,7 @@ import {
 import realm from '../database/Realm';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {Overlay} from 'react-native-elements/dist/overlay/Overlay';
-import {recipesArray} from '../screens/RecipesScreen';
+import {deleteRealmObject} from '../screens/RecipesScreen';
 
 export function RecipeItem({recipe}) {
 	//   const actions = [
@@ -41,17 +41,13 @@ export function RecipeItem({recipe}) {
 			</View>
 		);
 	};
-	const deleteRealmObject = () => {
-		realm.write(() => {
-			realm.delete(recipe);
-		});
-	};
 	console.log(recipe.image);
 	return (
 		<>
 			<Swipeable
 				renderRightActions={renderRightActions}
-				onSwipeableRightOpen={deleteRealmObject}>
+				onSwipeableRightOpen={deleteRealmObject}
+			>
 				<TouchableHighlight
 					key={realm.id}
 					style={{paddingVertical: 5}}

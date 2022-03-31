@@ -61,9 +61,13 @@ let Pizza = new Food('Pizza', 2269, true, 30);
 let Pasta = new Food('Pasta', 2269, false, 30);
 
 let recipesArray = [];
-/*
-		compares each string in the array and uses a quicksort to sort in order
-*/
+
+function deleteRealmObject(object) {
+	recipesArray.pop(object);
+	realm.write(() => {
+		realm.delete(object);
+	});
+}
 
 function sortByName() {
 	//console.log(Object.values(recipesObject))
@@ -376,4 +380,4 @@ const styles = StyleSheet.create({
 	overlayButton: {},
 });
 
-export {recipesArray};
+export {deleteRealmObject};
