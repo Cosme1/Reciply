@@ -70,49 +70,28 @@ function deleteRealmObject(object) {
 }
 
 function sortByName() {
-	//console.log(Object.values(recipesObject))
-	/* 
-		creates array but getting the name from each realmObject and put them together into an array
-	*/
-	// for (let i = 0; i < recipesObject.length; i++){
-	// 	const names = realm.objects('_Recipe')[i]
-	// 	NameArray[i] = names.setname
-	// 	console.log(NameArray)
-	// }
-	/*
-		Update realmObject by overwriting it with the quicksort function
-	*/
-	// let temp = [];
-	// let sortedArr = quicksort(recipesArray.map(r => r.setname));
-	// for (let i = 0; i < recipesArray.length; i++) {
-	// 	console.log(sortedArr[i]);
-	// 	console.log('i' + recipesArray[i].setname);
-	// 	console.log('i+1' + recipesArray[i + 1].setname);
-	// 	if (recipesArray[i].setname !== sortedArr[i]) {
-	// 		temp = recipesArray[i];
-	// 		recipesArray[i] = recipesArray[i + 1];
-	// 		recipesArray[i + 1] = temp;
-	// 		i = -1;
-	// 	}
-	// }
-	// console.log(recipesArray.map(r => r.setname));
 	function quicksortName(arr, pos = 0) {
-		if (arr.length < 2) return arr; //if array only holds one value or less it doesn't need to be sorted
+		//if array only holds one value or less it doesn't need to be sorted
+		//also acts as base case
+		if (arr.length < 2) return arr;
 
+		//The Pivot element determines the point at which the array is going to be divided
 		const pivot = arr[arr.length - 1].setname;
+		//The Pivotobject has the same function but only this time in the form of an object
 		const pivotObject = arr[arr.length - 1];
 		const left = [];
 		const right = [];
 
+		//This loop compares each value and places them into either the right or left array
 		while (pos < arr.length - 1) {
 			if (arr[pos].setname < pivot) left.push(arr[pos]);
 			else right.push(arr[pos]);
 			pos++;
 		}
 
+		//The function gets called recursivly until base case is reached for both left and right
 		return [...quicksortName(left), pivotObject, ...quicksortName(right)];
 	}
-
 	recipesArray = quicksortName(recipesArray);
 }
 
@@ -380,4 +359,4 @@ const styles = StyleSheet.create({
 	overlayButton: {},
 });
 
-export {deleteRealmObject};
+//export {deleteRealmObject};
