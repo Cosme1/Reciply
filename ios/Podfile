@@ -1,7 +1,11 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+<<<<<<< HEAD
 platform :ios, '15.4'
+=======
+platform :ios, '15.0'
+>>>>>>> d8d7842dfaebde584ed6eb57276774b969c303e0
 
 target 'React_App' do
   config = use_native_modules!
