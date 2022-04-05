@@ -29,10 +29,6 @@ export function RecipeItem({recipe}) {
 	};
 
 	const renderRightActions = (progress, dragX) => {
-		// const trans = dragX.interpolate({
-		//   inputRange: [0, 50, 100, 101],
-		//   outputRange: [-20, 0, 0, 1],
-		// });
 		return (
 			<View style={styles.deleteView}>
 				<TouchableOpacity>

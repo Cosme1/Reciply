@@ -38,7 +38,10 @@ export function Food(name, calories, vegetarian, preptime) {
 }
 let counter = 0;
 function CreateRecipeLayout({route, navigation}) {
+	//image state component to change the selected image dynamically
 	const [image, setImage] = useState(undefined);
+
+	//opens the photolibrary with given dimensions and saves chosen image path
 	const choosePhotofromLibrary = () => {
 		ImageCropPicker.openPicker({
 			width: 700,
