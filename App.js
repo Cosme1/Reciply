@@ -2,12 +2,12 @@
 
 import React from 'react';
 import {
-  View,
-  Text,
-  Button,
-  useColorScheme,
-  StyleSheet,
-  TouchableOpacity,
+	View,
+	Text,
+	Button,
+	useColorScheme,
+	StyleSheet,
+	TouchableOpacity,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -38,14 +38,14 @@ const Drawer = createDrawerNavigator();
 // };
 
 function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Recipes">
-        <Drawer.Screen name="Recipes" component={RecipeLayout} />
-        <Drawer.Screen name="CreateRecipe" component={CreateRecipeLayout} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Drawer.Navigator initialRouteName="CreateRecipe">
+				<Drawer.Screen name="Recipes" component={RecipeLayout} />
+				<Drawer.Screen name="CreateRecipe" component={CreateRecipeLayout} />
+			</Drawer.Navigator>
+		</NavigationContainer>
+	);
 }
 
 // const styles = StyleSheet.create({

@@ -46,8 +46,7 @@ export function RecipeItem({recipe}) {
 		<>
 			<Swipeable
 				renderRightActions={renderRightActions}
-				onSwipeableRightOpen={deleteRealmObject}
-			>
+				onSwipeableRightOpen={deleteRealmObject}>
 				<TouchableHighlight
 					key={realm.id}
 					style={{paddingVertical: 5}}
