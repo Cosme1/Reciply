@@ -11,9 +11,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		25C13F9B10500D2120565936 /* libPods-React_App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 191586B4786C86597BBA20AE /* libPods-React_App.a */; };
-		6B52B2899AED8A88972A77ED /* libPods-React_App-React_AppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEC4E77F6D6153FF5C7C070 /* libPods-React_App-React_AppTests.a */; };
+		5A4A66604F8653DC74E7F322 /* libPods-React_App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF2B1CE046CDC2BCF6D6EFF /* libPods-React_App.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		F01DCA81FE81F79832228058 /* libPods-React_App-React_AppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FCEFB6ED2C1C8C05E708FED /* libPods-React_App-React_AppTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,20 +30,20 @@
 		00E356EE1AD99517003FC87E /* React_AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = React_AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* React_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = React_AppTests.m; sourceTree = "<group>"; };
-		0FEC4E77F6D6153FF5C7C070 /* libPods-React_App-React_AppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-React_App-React_AppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DF2B1CE046CDC2BCF6D6EFF /* libPods-React_App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-React_App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* React_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = React_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = React_App/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = React_App/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = React_App/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = React_App/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = React_App/main.m; sourceTree = "<group>"; };
-		191586B4786C86597BBA20AE /* libPods-React_App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-React_App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38F135B3A45483697E6A8687 /* Pods-React_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App.debug.xcconfig"; path = "Target Support Files/Pods-React_App/Pods-React_App.debug.xcconfig"; sourceTree = "<group>"; };
+		5E8F2DF47529966E9F7F8E99 /* Pods-React_App-React_AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App-React_AppTests.release.xcconfig"; path = "Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests.release.xcconfig"; sourceTree = "<group>"; };
+		7AAADDEDEDC0E2FC453274CF /* Pods-React_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App.release.xcconfig"; path = "Target Support Files/Pods-React_App/Pods-React_App.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = React_App/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		90ECC6FDB97CF5B1E458516E /* Pods-React_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App.debug.xcconfig"; path = "Target Support Files/Pods-React_App/Pods-React_App.debug.xcconfig"; sourceTree = "<group>"; };
-		B6D0B1D2173FD07C351680B0 /* Pods-React_App-React_AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App-React_AppTests.release.xcconfig"; path = "Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests.release.xcconfig"; sourceTree = "<group>"; };
-		CBF30203B6A73557BBA83F3A /* Pods-React_App-React_AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App-React_AppTests.debug.xcconfig"; path = "Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8D053EE73DD82FB7FDF9A57B /* Pods-React_App-React_AppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App-React_AppTests.debug.xcconfig"; path = "Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9FCEFB6ED2C1C8C05E708FED /* libPods-React_App-React_AppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-React_App-React_AppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F2FA0777B3A8E5184C84E733 /* Pods-React_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-React_App.release.xcconfig"; path = "Target Support Files/Pods-React_App/Pods-React_App.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B52B2899AED8A88972A77ED /* libPods-React_App-React_AppTests.a in Frameworks */,
+				F01DCA81FE81F79832228058 /* libPods-React_App-React_AppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25C13F9B10500D2120565936 /* libPods-React_App.a in Frameworks */,
+				5A4A66604F8653DC74E7F322 /* libPods-React_App.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				191586B4786C86597BBA20AE /* libPods-React_App.a */,
-				0FEC4E77F6D6153FF5C7C070 /* libPods-React_App-React_AppTests.a */,
+				0DF2B1CE046CDC2BCF6D6EFF /* libPods-React_App.a */,
+				9FCEFB6ED2C1C8C05E708FED /* libPods-React_App-React_AppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -109,10 +109,10 @@
 		3EDA58DA8AA4B3B084DABB35 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				90ECC6FDB97CF5B1E458516E /* Pods-React_App.debug.xcconfig */,
-				F2FA0777B3A8E5184C84E733 /* Pods-React_App.release.xcconfig */,
-				CBF30203B6A73557BBA83F3A /* Pods-React_App-React_AppTests.debug.xcconfig */,
-				B6D0B1D2173FD07C351680B0 /* Pods-React_App-React_AppTests.release.xcconfig */,
+				38F135B3A45483697E6A8687 /* Pods-React_App.debug.xcconfig */,
+				7AAADDEDEDC0E2FC453274CF /* Pods-React_App.release.xcconfig */,
+				8D053EE73DD82FB7FDF9A57B /* Pods-React_App-React_AppTests.debug.xcconfig */,
+				5E8F2DF47529966E9F7F8E99 /* Pods-React_App-React_AppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -164,16 +164,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "React_AppTests" */;
 			buildPhases = (
-				580A0EA520573282EAACB8DB /* [CP] Check Pods Manifest.lock */,
+				C41448E9FC6201097D08FE81 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-<<<<<<< HEAD
-				54571A40FE8245E190EC493D /* [CP] Copy Pods Resources */,
-=======
-				CF7E3AEC2841F027B0E33D10 /* [CP] Embed Pods Frameworks */,
-				982AD28A5FA872DCBE838025 /* [CP] Copy Pods Resources */,
->>>>>>> d8d7842dfaebde584ed6eb57276774b969c303e0
+				5D393CB4D76F17149E989325 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,18 +184,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "React_App" */;
 			buildPhases = (
-				C9224E5B6FA73B6D55EFAFA3 /* [CP] Check Pods Manifest.lock */,
+				07A2568540682F42BAA0A32B /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-<<<<<<< HEAD
-				414180242BD233D4AD904718 /* [CP] Copy Pods Resources */,
-=======
-				2A3B80A8AAE6664C752ADCD4 /* [CP] Embed Pods Frameworks */,
-				1428114435DBA2A4F93A8A2C /* [CP] Copy Pods Resources */,
->>>>>>> d8d7842dfaebde584ed6eb57276774b969c303e0
+				A777A3DC90749C432A6E2581 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -281,83 +271,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		1428114435DBA2A4F93A8A2C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2A3B80A8AAE6664C752ADCD4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		580A0EA520573282EAACB8DB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-React_App-React_AppTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-<<<<<<< HEAD
-		DFE95E6AF0BCD1644AC349DD /* [CP] Check Pods Manifest.lock */ = {
-=======
-		982AD28A5FA872DCBE838025 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9224E5B6FA73B6D55EFAFA3 /* [CP] Check Pods Manifest.lock */ = {
+		07A2568540682F42BAA0A32B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -379,22 +293,60 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF7E3AEC2841F027B0E33D10 /* [CP] Embed Pods Frameworks */ = {
->>>>>>> d8d7842dfaebde584ed6eb57276774b969c303e0
+		5D393CB4D76F17149E989325 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-React_App-React_AppTests/Pods-React_App-React_AppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A777A3DC90749C432A6E2581 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-React_App/Pods-React_App-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C41448E9FC6201097D08FE81 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-React_App-React_AppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -449,7 +401,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBF30203B6A73557BBA83F3A /* Pods-React_App-React_AppTests.debug.xcconfig */;
+			baseConfigurationReference = 8D053EE73DD82FB7FDF9A57B /* Pods-React_App-React_AppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -476,7 +428,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6D0B1D2173FD07C351680B0 /* Pods-React_App-React_AppTests.release.xcconfig */;
+			baseConfigurationReference = 5E8F2DF47529966E9F7F8E99 /* Pods-React_App-React_AppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -500,7 +452,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90ECC6FDB97CF5B1E458516E /* Pods-React_App.debug.xcconfig */;
+			baseConfigurationReference = 38F135B3A45483697E6A8687 /* Pods-React_App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -529,7 +481,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2FA0777B3A8E5184C84E733 /* Pods-React_App.release.xcconfig */;
+			baseConfigurationReference = 7AAADDEDEDC0E2FC453274CF /* Pods-React_App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
