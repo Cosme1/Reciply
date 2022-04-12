@@ -147,7 +147,7 @@ export function RecipeLayout({navigation}) {
 	}
 	const [recipes, setrecipes] = useState([]);
 	const Recipes = realm.objects('_Recipe');
-	while (Recipes.length >= recipesArray) {
+	while (Recipes.length > recipesArray) {
 		for (let i = 0; i < Recipes.length; i++) {
 			recipesArray.push(Recipes[i]);
 		}

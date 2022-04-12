@@ -64,7 +64,12 @@ export function RecipeItem({recipe}) {
 				</TouchableHighlight>
 			</Swipeable>
 			<Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-				{<Text>Hello</Text>}
+				{
+					<>
+						<Text>Ingredients: </Text>
+						<Text>{recipe.ingredients}</Text>
+					</>
+				}
 			</Overlay>
 		</>
 	);
