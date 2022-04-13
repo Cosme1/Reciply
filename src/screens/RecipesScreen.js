@@ -62,13 +62,6 @@ let Pasta = new Food('Pasta', 2269, false, 30);
 
 let recipesArray = [];
 
-function deleteRealmObject(object) {
-	recipesArray.pop(object);
-	realm.write(() => {
-		realm.delete(object);
-	});
-}
-
 function sortByName() {
 	function quicksortName(arr, pos = 0) {
 		//if array only holds one value or less it doesn't need to be sorted
@@ -105,7 +98,7 @@ function sortByCalories() {
 		const right = [];
 
 		while (pos < arr.length - 1) {
-			if (arr[pos].setcalories < pivot) left.push(arr[pos]);
+			if (parseInt(arr[pos].setcalories) < parseInt(pivot)) left.push(arr[pos]);
 			else right.push(arr[pos]);
 			pos++;
 		}
@@ -147,10 +140,12 @@ export function RecipeLayout({navigation}) {
 	}
 	const [recipes, setrecipes] = useState([]);
 	const Recipes = realm.objects('_Recipe');
-	while (Recipes.length > recipesArray) {
+	while (Recipes.length != recipesArray.length) {
+		recipesArray = [];
 		for (let i = 0; i < Recipes.length; i++) {
 			recipesArray.push(Recipes[i]);
 		}
+		console.log('Updating');
 	}
 
 	//recipesArray.push(Recipes.filter(recipe => recipe))
@@ -209,35 +204,6 @@ export function RecipeLayout({navigation}) {
 
 	return (
 		<ScrollView style={styles.container}>
-			<Swipeable
-				renderRightActions={renderRightActions}
-				//onSwipeableRightOpen={delteRealmObject}
-			>
-				<TouchableHighlight style={{paddingVertical: 5}}>
-					<View style={styles.button}>
-						<View>
-							<Text style={styles.foodTitle}>{Pizza.name}</Text>
-							{veg}
-							<Text style={styles.foodSubtitle}>Calories: {Pizza.calories}</Text>
-						</View>
-						<Image
-							source={require('../assets/pizza.jpg')}
-							style={styles.image}></Image>
-					</View>
-				</TouchableHighlight>
-			</Swipeable>
-			<TouchableHighlight style={{paddingVertical: 5}}>
-				<View style={styles.button}>
-					<View>
-						<Text style={styles.foodTitle}>{Pasta.name}</Text>
-						{veg}
-						<Text style={styles.foodSubtitle}>Calories: {Pasta.calories}</Text>
-					</View>
-					<Image
-						source={require('../assets/pizza.jpg')}
-						style={styles.image}></Image>
-				</View>
-			</TouchableHighlight>
 			{recipesArray.map(_recipe => (
 				<RecipeItem key={`${_recipe.id}`} recipe={_recipe} />
 			))}
@@ -359,5 +325,3 @@ const styles = StyleSheet.create({
 	},
 	overlayButton: {},
 });
-
-//export {deleteRealmObject};

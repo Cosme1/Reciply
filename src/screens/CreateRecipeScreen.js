@@ -9,7 +9,6 @@ import {
 	TextInput,
 	ImageProps,
 } from 'react-native';
-import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {
 	NavigationContainer,
 	useNavigation,
@@ -124,15 +123,18 @@ function CreateRecipeLayout({route, navigation}) {
 				style={{padding: 15}}
 			/>
 			<Text style={styles.heading}>Ingredients</Text>
-			{ingredients.map(ingre => (
-				<TextInput
-					style={styles.input}
-					key={new BSON.ObjectID()}
-					placeholder={ingredients.indexOf(ingre).toString()}
-					onChangeText={setIngredientElement[counter]}
-					value={ingredientElement[counter]}
-				/>
-			))}
+			{ingredients.map(
+				ingre => (
+					<TextInput
+						style={styles.input}
+						key={new BSON.ObjectID()}
+						placeholder={ingredients.indexOf(ingre).toString()}
+						onChangeText={setIngredientElement[counter]}
+						value={ingredientElement[counter]}
+					/>
+				),
+				console.log('Ingrendient: ' + ingredients[counter]),
+			)}
 
 			<View style={styles.addButton}>
 				<Button title="Add" onPress={addIngredient} />

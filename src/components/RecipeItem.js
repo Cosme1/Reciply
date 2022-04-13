@@ -28,6 +28,12 @@ export function RecipeItem({recipe}) {
 		setVisible(!visible);
 	};
 
+	const deleteRealmObject = () => {
+		realm.write(() => {
+			realm.delete(recipe);
+		});
+	};
+
 	const renderRightActions = (progress, dragX) => {
 		return (
 			<View style={styles.deleteView}>
@@ -67,6 +73,9 @@ export function RecipeItem({recipe}) {
 				{
 					<>
 						<Text>Ingredients: </Text>
+						{recipe.ingredients.map(arr => (
+							<Text>{arr}</Text>
+						))}
 						<Text>{recipe.ingredients}</Text>
 					</>
 				}
